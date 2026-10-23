@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de publicaciones</title>
+    <style>
+        body { font-family: Arial; max-width: 720px; margin: 2rem auto; }
+        form { display: grid; gap: .5rem; margin-bottom: 1rem; }
+        .post { border: 1px solid #ddd; border-radius: 6px;
+                padding: 0 1rem; margin: .5rem 0; cursor: pointer; }
+        .post:hover { background: #fafafa; }
+        .nuevo { border-color: seagreen; background: #f0fff4; }
+        .error { color: crimson; }
+        .comentarios { margin: .5rem 0 1rem 1.5rem; padding-left: 1rem;
+                       border-left: 3px solid #ccc; font-size: .9rem; }
+        .comentario { margin: .4rem 0; }
+        .comentario strong { display: block; }
+        fieldset { border: 1px solid #ddd; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <h1>Gestor de publicaciones</h1>
+
+    <h2>Listar (GET)</h2>
+    <form id="form-buscar">
+        <label>Usuario (1 a 10)
+            <input type="number" id="input-usuario"
+                   min="1" max="10" value="1">
+        </label>
+        <label>Filtrar por título
+            <input type="text" id="input-buscar" placeholder="Texto a filtrar...">
+        </label>
+        <label>Cantidad
+            <select id="select-limit">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </label>
+        <button type="submit">Listar publicaciones</button>
+    </form>
+
+    <h2>Nueva publicación (POST)</h2>
+    <form id="form-crear">
+        <input type="text" id="input-titulo"
+               placeholder="Título (mín. 5 caracteres)" required>
+        <textarea id="input-cuerpo" rows="3"
+                  placeholder="Contenido" required></textarea>
+        <button type="submit" id="btn-crear">Publicar</button>
+    </form>
+
+    <h2>Nuevo comentario (POST con FormData)</h2>
+    <form id="form-comentar">
+        <input type="number" name="postId" id="input-postid"
+               placeholder="ID de la publicación" min="1" required>
+        <input type="text"   name="name"  placeholder="Nombre"   required>
+        <input type="email"  name="email" placeholder="Email"    required>
+        <textarea name="body" rows="2" placeholder="Comentario"  required></textarea>
+        <button type="submit" id="btn-comentar">Enviar comentario</button>
+    </form>
+
+    <h2>Formulario GET de ejemplo (Actividad 1)</h2>
+    <form action="" method="get">
+        <input type="text"   name="q"      placeholder="Término de búsqueda">
+        <input type="number" name="pagina" value="1">
+        <button type="submit">Enviar por GET</button>
+    </form>
+    <p id="resultado-get"></p>
+
+    <p id="estado"></p>
+    <section id="lista"></section>
+
+    <script src="app.js"></script>
+</body>
+</html>
